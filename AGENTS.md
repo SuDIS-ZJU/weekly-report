@@ -5,11 +5,14 @@ This file provides instructions for any AI agent (Claude Code, Codex, OpenClaw, 
 ## Setup
 
 1. Clone this repository
-2. Copy the example config and customize:
+2. **First time only** — create your config:
 
 ```bash
 cp examples/student_config.json student_config.json
 ```
+
+If `student_config.json` does not exist, tell the student:
+> "这是你第一次使用，请先创建配置文件：cp examples/student_config.json student_config.json，然后编辑填入你的姓名和导师邮箱。"
 
 Edit `student_config.json` with the student's name, professor email, and drafts directory.
 
@@ -28,7 +31,9 @@ Analyze what they provide:
 - For files: read and extract concrete work items
 - For git logs: parse commits into categorized tasks
 
-Summarize your findings back: "Based on your materials, I found you did X, Y, Z. Is that accurate?"
+Also identify **referenceable files** — figures, data files, screenshots, code results that could be linked in the report appendix.
+
+Summarize your findings back: "Based on your materials, I found you did X, Y, Z. Is that accurate?" and list files you found: "These files could be referenced in the appendix: [file1.png], [file2.csv]. Want to include any?"
 
 ### 2. Generate template
 
@@ -54,6 +59,7 @@ Go through the report sections, grounding questions in the artifacts you analyze
 | 下周计划 | Top 3-5 priorities? Dependencies? |
 | 时间分布 | Hours on research vs project vs classes? |
 | 本周心得 | Insights, lessons, reflections? |
+| 附录与参考资料 | Add links to referenceable files. Use `![[file.png]]` for images, `[doc.pdf](doc.pdf)` for documents, `[Title](url)` for online refs. File names must match actual files. |
 
 Push for specificity. "继续推进" is never an acceptable answer.
 
@@ -68,10 +74,11 @@ Check:
 ### 5. Finalize
 
 Remind the student:
-- Subject: `{student_name}-周报-{YYYY-MM-DD}-{YYYY-MM-DD}`
-- Paste as email body
-- Attach referenced files
-- Send to professor
+1. Subject: `{student_name}-周报-{YYYY-MM-DD}-{YYYY-MM-DD}`
+2. Paste as email body
+3. **Attach all referenced files**: The Markdown links (`![[file.png]]`, `[file.pdf](file.pdf)`) don't transfer files automatically. List each referenced file and tell the student to attach them manually:
+   > "你在附录中引用了以下文件，请务必作为邮件附件一起发送：file1.png, file2.pdf"
+4. Send to professor
 
 ## Report format
 

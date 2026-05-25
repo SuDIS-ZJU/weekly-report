@@ -15,11 +15,15 @@ Help research students draft structured weekly reports. The workflow has 5 steps
 ## Prerequisites
 
 1. Clone this repo
-2. Copy the example config and fill in your details:
+2. **First time only** — create your config:
 
 ```bash
 cp examples/student_config.json student_config.json
 ```
+
+If `student_config.json` does not exist when the student invokes this skill, remind them:
+
+> "这是你第一次使用，请先创建配置文件：`cp examples/student_config.json student_config.json`，然后编辑填入你的姓名和导师邮箱。"
 
 Edit `student_config.json`:
 - `student_name`: your name (must match email subject format)
@@ -66,6 +70,14 @@ After reading, summarize what you found back to the student:
 - [item 3]
 ...
 这些准确吗？有没有遗漏或者需要修正的？"
+
+Also identify **referenceable files** — figures, data files, screenshots, papers, or code that the student might want to link in the report appendix. List them:
+
+"以下文件可以在周报附录中作为链接引用：
+- [实验截图.png] — 实验结果可视化
+- [ablation_table.csv] — 消融实验数据
+- ...
+你想在附录中引用哪些？"
 
 Let the student confirm or correct. Then proceed.
 
@@ -121,6 +133,15 @@ Combine what you learned from Step 1 with targeted questions. Go through each se
 **本周心得**
 - "Any insights, lessons learned, or reflections worth recording?"
 
+**附录与参考资料**
+- Add links to the referenceable files identified in Step 1. Use Obsidian wikilinks for local files and Markdown links for URLs:
+  - `![[实验截图.png]]` — for images/figures that should render inline
+  - `[补充文档.pdf](补充文档.pdf)` — for documents
+  - `[Paper Title](https://arxiv.org/abs/xxxx.xxxxx)` — for online references
+- If the student's artifacts folder contains result files, suggest linking them:
+  - "我看到你的实验目录下有 `result_plot.png`，要在附录里引用吗？"
+- File names in links must exactly match the actual filenames (the parser validates this).
+
 ## Step 4: Validate
 
 After filling all sections, check the report structure:
@@ -137,11 +158,18 @@ If issues are found, fix them with the student.
 Show the completed report to the student and ask:
 - "Does this look good? Any changes needed?"
 
-Remind them:
-- Email subject must be: `{student_name}-周报-{YYYY-MM-DD}-{YYYY-MM-DD}`
-- Paste the Markdown as the email body
-- Attach any referenced files directly to the email
-- Send to the professor's email address
+Remind them of the sending steps:
+
+1. Email subject must be: `{student_name}-周报-{YYYY-MM-DD}-{YYYY-MM-DD}`
+2. Paste the Markdown as the email body
+3. **Attach all referenced files**: The Markdown body contains links like `![[file.png]]` or `[file.pdf](file.pdf)`. The student must manually attach each referenced file to the email — the links alone won't transfer the files. List them explicitly:
+
+> "你在附录中引用了以下文件，请务必作为邮件附件一起发送：
+> - file1.png
+> - file2.pdf
+> - ..."
+
+4. Send to the professor's email address
 
 ## Important rules
 
