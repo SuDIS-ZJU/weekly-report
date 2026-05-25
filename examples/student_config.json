@@ -1,0 +1,5 @@
+{
+  "student_name": "张三",
+  "professor_email": "professor@example.com",
+  "drafts_dir": "~/weekly_report_drafts"
+}
